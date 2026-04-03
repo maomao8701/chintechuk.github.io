@@ -1,10 +1,334 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Qintarally</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practical AI Tools for Real Work</title>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #111827;
+      --accent-2: #2563eb;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 18px 60px;
+    }
+
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 32px 24px;
+      margin-bottom: 24px;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+
+    h1 { font-size: 40px; }
+    h2 { font-size: 26px; }
+    h3 { font-size: 20px; }
+
+    p { margin: 0 0 14px; }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin: 14px 0 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    button:hover { opacity: 0.92; }
+
+    .primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .secondary {
+      background: #eef2ff;
+      color: #1e3a8a;
+    }
+
+    .output {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 14px;
+      background: #fbfdff;
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+
+    .tips {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      margin-top: 24px;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 26px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #3730a3;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 30px; }
+      h2 { font-size: 22px; }
+      .hero, .tool-card, .tips { padding: 18px; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to Qintarally</h1>
-    <p>This is my first website.</p>
+  <div class="wrap">
+    <section class="hero">
+      <div class="badge">Simple AI Tools for Real Business Work</div>
+      <h1>Practical AI Tools for Real Work</h1>
+      <p>This page is built for people who need useful business output fast, without writing code or learning complicated systems.</p>
+      <p class="muted">Fill in the fields, click generate, and copy the prompt into ChatGPT or another AI assistant.</p>
+    </section>
+
+    <div class="grid">
+      <section class="tool-card">
+        <h2>1. Cold Email Generator</h2>
+        <p class="muted">Create a first-contact prompt for sales outreach.</p>
+
+        <label for="ce-product">What are you offering?</label>
+        <input id="ce-product" placeholder="Example: industrial lubricant additives" />
+
+        <label for="ce-market">Target market or country</label>
+        <input id="ce-market" placeholder="Example: Japan / Southeast Asia / Germany" />
+
+        <label for="ce-buyer">Target customer type</label>
+        <input id="ce-buyer" placeholder="Example: distributors, refiners, OEM buyers" />
+
+        <label for="ce-advantage">Your main advantage</label>
+        <textarea id="ce-advantage" placeholder="Example: flexible sourcing, fast response, niche product knowledge"></textarea>
+
+        <div class="actions">
+          <button class="primary" onclick="generateColdEmail()">Generate Prompt</button>
+          <button class="secondary" onclick="copyText('cold-output')">Copy</button>
+        </div>
+
+        <div class="output" id="cold-output">Your generated prompt will appear here.</div>
+      </section>
+
+      <section class="tool-card">
+        <h2>2. Follow-up Email Generator</h2>
+        <p class="muted">Useful when someone did not reply to your first email.</p>
+
+        <label for="fu-topic">What was your first email about?</label>
+        <input id="fu-topic" placeholder="Example: cooperation on lubricant distribution" />
+
+        <label for="fu-days">How many days passed?</label>
+        <input id="fu-days" placeholder="Example: 3 days / 1 week / 2 weeks" />
+
+        <label for="fu-goal">What do you want now?</label>
+        <input id="fu-goal" placeholder="Example: ask for feedback, arrange a call, confirm interest" />
+
+        <label for="fu-tone">Preferred tone</label>
+        <input id="fu-tone" placeholder="Example: polite, concise, commercially active" />
+
+        <div class="actions">
+          <button class="primary" onclick="generateFollowUp()">Generate Prompt</button>
+          <button class="secondary" onclick="copyText('follow-output')">Copy</button>
+        </div>
+
+        <div class="output" id="follow-output">Your generated prompt will appear here.</div>
+      </section>
+
+      <section class="tool-card">
+        <h2>3. Product Introduction Generator</h2>
+        <p class="muted">Turn product facts into a clean business introduction.</p>
+
+        <label for="pi-product">Product name</label>
+        <input id="pi-product" placeholder="Example: BLCO supply / mold manufacturing service / diesel additive" />
+
+        <label for="pi-features">Key features</label>
+        <textarea id="pi-features" placeholder="Example: low sulfur, stable sourcing, suitable for Asian market"></textarea>
+
+        <label for="pi-audience">Who is the audience?</label>
+        <input id="pi-audience" placeholder="Example: refinery buyers, distributors, engineering customers" />
+
+        <label for="pi-format">What output do you want?</label>
+        <input id="pi-format" placeholder="Example: email paragraph, website intro, short sales pitch" />
+
+        <div class="actions">
+          <button class="primary" onclick="generateProductIntro()">Generate Prompt</button>
+          <button class="secondary" onclick="copyText('product-output')">Copy</button>
+        </div>
+
+        <div class="output" id="product-output">Your generated prompt will appear here.</div>
+      </section>
+    </div>
+
+    <section class="tips">
+      <h3>How to use this page</h3>
+      <p>1. Fill in the blanks.</p>
+      <p>2. Click “Generate Prompt”.</p>
+      <p>3. Copy the result.</p>
+      <p>4. Paste it into ChatGPT and let it generate the final email or text.</p>
+      <p class="muted">This is a simple practical layer between your work and AI, designed to save time without requiring technical skills.</p>
+    </section>
+
+    <div class="footer">
+      Built as an independent side project for practical work and communication.
+    </div>
+  </div>
+
+  <script>
+    function generateColdEmail() {
+      const product = document.getElementById('ce-product').value.trim();
+      const market = document.getElementById('ce-market').value.trim();
+      const buyer = document.getElementById('ce-buyer').value.trim();
+      const advantage = document.getElementById('ce-advantage').value.trim();
+
+      const text = `Write a concise and professional B2B cold email in English.
+
+What I offer: ${product}
+Target market: ${market}
+Target customer: ${buyer}
+Main advantage: ${advantage}
+
+Requirements:
+- Keep it natural and businesslike
+- Avoid exaggerated claims
+- Use short paragraphs
+- End with a clear but soft call to action
+- Suitable for first contact with an overseas business partner`;
+
+      document.getElementById('cold-output').textContent = text;
+    }
+
+    function generateFollowUp() {
+      const topic = document.getElementById('fu-topic').value.trim();
+      const days = document.getElementById('fu-days').value.trim();
+      const goal = document.getElementById('fu-goal').value.trim();
+      const tone = document.getElementById('fu-tone').value.trim();
+
+      const text = `Write a follow-up business email in English.
+
+Previous topic: ${topic}
+Time passed since first email: ${days}
+Current goal: ${goal}
+Preferred tone: ${tone}
+
+Requirements:
+- Keep it polite and brief
+- Do not sound pushy
+- Show commercial initiative
+- Make it suitable for a real B2B follow-up
+- End with one clear next step`;
+
+      document.getElementById('follow-output').textContent = text;
+    }
+
+    function generateProductIntro() {
+      const product = document.getElementById('pi-product').value.trim();
+      const features = document.getElementById('pi-features').value.trim();
+      const audience = document.getElementById('pi-audience').value.trim();
+      const format = document.getElementById('pi-format').value.trim();
+
+      const text = `Write a professional English product introduction.
+
+Product/service: ${product}
+Key features: ${features}
+Audience: ${audience}
+Desired format: ${format}
+
+Requirements:
+- Make it clear and commercially useful
+- Focus on value and application
+- Avoid technical overload unless necessary
+- Keep the language international and business-friendly`;
+
+      document.getElementById('product-output').textContent = text;
+    }
+
+    function copyText(elementId) {
+      const text = document.getElementById(elementId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Copied successfully.');
+      });
+    }
+  </script>
 </body>
 </html>
