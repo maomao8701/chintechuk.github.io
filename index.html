@@ -163,10 +163,31 @@
       <div class="badge">Simple AI Tools for Real Business Work</div>
       <h1>Practical AI Tools for Real Work</h1>
       <p>This page is built for people who need useful business output fast, without writing code or learning complicated systems.</p>
-      <p class="muted">Fill in the fields, click generate, and copy the prompt into ChatGPT or another AI assistant.</p>
+      <p class="muted">It is especially useful for non-native English speakers who want to turn simple ideas or Chinese instructions into more professional business English with AI.</p>
     </section>
 
     <div class="grid">
+      <section class="tool-card">
+        <h2>0. Chinese to Business English Email Generator</h2>
+        <p class="muted">Describe your situation in Chinese, then get a ready-to-use AI prompt for professional English business writing.</p>
+
+        <label for="cn-situation">Describe your request in Chinese</label>
+        <textarea id="cn-situation" placeholder="例如：我想礼貌地跟进上周发给客户的报价邮件，并询问他是否已经看过报价。"></textarea>
+
+        <label for="cn-purpose">What do you want the final result to be?</label>
+        <input id="cn-purpose" placeholder="Example: follow-up email / quotation request / product introduction" />
+
+        <label for="cn-tone">Preferred tone</label>
+        <input id="cn-tone" placeholder="Example: polite, concise, professional" />
+
+        <div class="actions">
+          <button class="primary" onclick="generateChineseEmail()">Generate Prompt</button>
+          <button class="secondary" onclick="copyText('chinese-output')">Copy</button>
+        </div>
+
+        <div class="output" id="chinese-output">Your generated prompt will appear here.</div>
+      </section>
+
       <section class="tool-card">
         <h2>1. Cold Email Generator</h2>
         <p class="muted">Create a first-contact prompt for sales outreach.</p>
@@ -255,6 +276,32 @@
   </div>
 
   <script>
+    function generateChineseEmail() {
+      const situation = document.getElementById('cn-situation').value.trim();
+      const purpose = document.getElementById('cn-purpose').value.trim();
+      const tone = document.getElementById('cn-tone').value.trim();
+
+      const text = `You are a professional business communication assistant.
+
+Please read the following Chinese request and write a natural, professional English business email.
+
+Chinese request:
+${situation}
+
+Desired result: ${purpose}
+Preferred tone: ${tone}
+
+Requirements:
+- Do not translate word for word
+- Rewrite it into natural business English
+- Keep the structure clear and practical
+- Use short paragraphs
+- Make it suitable for real B2B communication
+- If useful, provide a subject line as well`;
+
+      document.getElementById('chinese-output').textContent = text;
+    }
+
     function generateColdEmail() {
       const product = document.getElementById('ce-product').value.trim();
       const market = document.getElementById('ce-market').value.trim();
