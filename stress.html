@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>崩溃检测器 - ChinTechUK</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+<h1>你现在离崩溃还有多远？</h1>
+
+<!-- 输入区 -->
+<textarea id="inputText" placeholder="今天我感觉…"></textarea>
+<button id="submitBtn">检测一下</button>
+
+<!-- 结果区 -->
+<div id="resultArea" style="display:none;">
+  <p id="index">崩溃指数：--%</p>
+  <p id="status">状态：--</p>
+  <p id="analysis">分析：--</p>
+  <p id="advice">行动建议：--</p>
+  <button id="shareBtn">生成分享图</button>
+</div>
+
+<script src="stress.js"></script>
+</body>
+</html>
