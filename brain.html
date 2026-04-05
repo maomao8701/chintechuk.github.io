@@ -1,1 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>大脑清理模式</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+<h1>大脑清理模式：今天只处理最重要的事</h1>
+<textarea id="inputText" placeholder="把今天脑子里的杂乱想法写下来…"></textarea>
+<br>
+<button id="submitBtn">清理我的大脑</button>
 
+<div id="resultArea" style="display:none;">
+  <p id="mustDo">今日必须做：--</p>
+  <p id="postpone">可以延期：--</p>
+  <p id="ignore">忽略：--</p>
+  <button id="shareBtn">生成分享图</button>
+</div>
+
+<script src="brain.js"></script>
+</body>
+</html>
