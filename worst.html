@@ -1,1 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>最坏结果模拟器</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+<h1>最坏结果模拟器：面对焦虑，先看看最坏情况</h1>
+<textarea id="inputText" placeholder="我最担心的事情是…"></textarea>
+<br>
+<button id="submitBtn">模拟最坏情况</button>
 
+<div id="resultArea" style="display:none;">
+  <p id="event">事件：--</p>
+  <p id="worst">最坏情况：--</p>
+  <p id="prob">实际概率：--</p>
+  <p id="advice">建议方案：--</p>
+  <button id="shareBtn">生成分享图</button>
+</div>
+
+<script src="worst.js"></script>
+</body>
+</html>
